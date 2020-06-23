@@ -1,0 +1,28 @@
+\begin{thebibliography}{1}
+
+\bibitem{mckeown2008openflow}
+Nick McKeown, Tom Anderson, Hari Balakrishnan, Guru Parulkar, Larry Peterson,
+  Jennifer Rexford, Scott Shenker, and Jonathan Turner.
+\newblock Openflow: enabling innovation in campus networks.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 38(2):69--74, 2008.
+
+\bibitem{bianchi2014openstate}
+Giuseppe Bianchi, Marco Bonola, Antonio Capone, and Carmelo Cascone.
+\newblock Openstate: programming platform-independent stateful openflow
+  applications inside the switch.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 44(2):44--51, 2014.
+
+\bibitem{bianchi2016open}
+Giuseppe Bianchi, Marco Bonola, Salvatore Pontarelli, Davide Sanvito, Antonio
+  Capone, and Carmelo Cascone.
+\newblock Open packet processor: a programmable architecture for wire speed
+  platform-independent stateful in-network processing.
+\newblock {\em arXiv preprint arXiv:1605.01977}, 2016.
+
+\bibitem{bosshart2014p4}
+Pat Bosshart, Dan Daly, Glen Gibb, Martin Izzard, Nick McKeown, Jennifer
+  Rexford, Cole Schlesinger, Dan Talayco, Amin Vahdat, George Varghese, et~al.
+\newblock P4: Programming protocol-independent packet processors.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 44(3):87--95, 2014.
+
+\end{thebibliography}

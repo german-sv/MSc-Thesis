@@ -1,0 +1,107 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = IsoLatin
+
+\documentclass[a4paper,12pt,twoside,english]{toptesi}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a-1b]{pdfx}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{amsmath}
+
+\ifpdf
+\graphicspath{{Figures/}{Figures/PDF/}{Figures/}}
+\else
+\graphicspath{{Figures/Vector/}{Figures/}}
+\fi
+
+\lstdefinelanguage{P4}
+{
+	% list of keywords
+	alsoletter=\#,
+	morekeywords={
+		header\_type,
+		fields,
+		header,
+		parser,
+		extract,
+		return,
+		default,
+		next,
+		\#define,
+		latest,
+		select,
+		apply,
+		control,
+		table,
+		reads,
+		actions,
+		modify\_field,
+		action,
+		valid,
+		nop,
+		exact,
+		lpm,
+		if,
+		hit,
+		and,
+		extern,
+		void,
+		bit
+	},
+	sensitive=true, % keywords are not case-sensitive
+	morecomment=[l]{//}, % l is for line comment
+	morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+	morestring=[b]" % defines that strings are enclosed in double quotes
+}
+
+\definecolor{eclipseBlue}{RGB}{42,0.0,255}
+\definecolor{eclipseGreen}{RGB}{63,127,95}
+\definecolor{eclipsePurple}{RGB}{127,0,85}
+
+\lstset{
+	language={P4},
+	basicstyle=\fontsize{8}{9}\ttfamily, % Global Code Style
+	captionpos=b, % Position of the Caption (t for top, b for bottom)
+	extendedchars=true, % Allows 256 instead of 128 ASCII characters
+	tabsize=2, % number of spaces indented when discovering a tab 
+	columns=fixed, % make all characters equal width
+	keepspaces=true, % does not ignore spaces to fit width, convert tabs to spaces
+	showstringspaces=false, % lets spaces in strings appear as real spaces
+	breaklines=true, % wrap lines if they don't fit
+	frame=trbl, % draw a frame at the top, right, left and bottom of the listing
+	%frameround=tttt, % make the frame round at all four corners
+	framesep=4pt, % quarter circle size of the round corners
+	numbers=left, % show line numbers at the left
+	numberstyle=\tiny\ttfamily, % style of the line numbers
+	commentstyle=\color{eclipseGreen}, % style of comments
+	keywordstyle=\color{eclipsePurple}, % style of keywords
+	stringstyle=\color{eclipseBlue}, % style of strings
+}
+
+\hypersetup{%
+    pdfpagemode={UseOutlines},
+    bookmarksopen,
+    pdfstartview={FitH},
+    colorlinks,
+    linkcolor={blue},
+    citecolor={blue},
+    urlcolor={blue}
+  }
+
+\newtheorem{osservazione}{Osservazione}% Standard LaTeX
+\newtheorem{definition}{Definition}
+
+
+\begin{document}
+\english
+\include{front}
+\frontespizio
+
+
+\end{document}

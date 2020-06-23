@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: toptesi-example.aux
+A level-1 auxiliary file: Frontespizio/front.aux
+A level-1 auxiliary file: acknowledgements.aux
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: Chapter1/chapter1.aux
+A level-1 auxiliary file: Chapter2/chapter2.aux
+A level-1 auxiliary file: Chapter3/chapter3.aux
+A level-1 auxiliary file: Chapter4/chapter4.aux
+The style file: plain.bst
+Database file #1: biblio.bib
+You've used 15 entries,
+            2118 wiz_defined-function locations,
+            609 strings with 7375 characters,
+and the built_in function-call counts, 6662 in all, are:
+= -- 658
+> -- 355
+< -- 8
++ -- 142
+- -- 124
+* -- 466
+:= -- 1054
+add.period$ -- 50
+call.type$ -- 15
+change.case$ -- 106
+chr.to.int$ -- 0
+cite$ -- 15
+duplicate$ -- 274
+empty$ -- 460
+format.name$ -- 124
+if$ -- 1445
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 15
+newline$ -- 78
+num.names$ -- 32
+pop$ -- 107
+preamble$ -- 1
+purify$ -- 91
+quote$ -- 0
+skip$ -- 232
+stack$ -- 0
+substring$ -- 374
+swap$ -- 109
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 60
+warning$ -- 0
+while$ -- 48
+width$ -- 17
+write$ -- 179

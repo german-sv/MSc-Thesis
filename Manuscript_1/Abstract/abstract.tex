@@ -1,0 +1,17 @@
+% ************************** Thesis Abstract *****************************
+% Use `abstract' as an option in the document class to print only the titlepage and the abstract.
+% The maximum number of characters in abstract must be 4000 (defined by PhD school of Politecnico di Torino). 
+\begin{abstract}
+	The field of software defined networking (SDN) has been rapidly evolving in the recent years. Multiple per-packet processing functions are being defined in order to introduce a tighter control over the network. However, these new functionalities can create considerable overhead and significant delays for control information exchanged with the controller. These factors lead to a reduced reactivity to network events and an overall performance degradation.
+
+	In order to overcome these limitations a big effort is being devoted towards the definition of a novel approach based on stateful functionalities.
+	The use of stateful approaches allows to offload some of the controller functions directly to the switches by defining persistent states that can hold state information related to per-packet processing rules. The proposed solutions however make use of a centralized state placement, eventually forcing the majority of traffic to pass through a single device which can create single points of failure and reduced performance. 
+	
+	The purpose of my research was to design and implement a scalable stateful solution that would lead to an increased performance and reliability. 
+	The idea behind the proposed approach was to distribute the state information across multiple forwarding devices while guaranteeing high consistency among the states. The proposed solution is able to provide lower overhead and thus better performance in respect to the solutions present in literature and is able to prevent state information loss in case of isolated failures.
+	
+	The implementation and evaluation has been performed in an emulated network environment with virtual switches programmed in P4, an emerging data-plane programming language. 
+	
+	In a scenario of a DDoS attack towards an autonomous system by neighboring autonomous systems the solution based on distributed states led to a substantial improvement in terms of reactiveness and introduced overhead in respect to solutions based on classical SDN. 
+	The obtained results are also compared to the results produced by a collaborating research group whose effort was devoted to a yet non-standardized extension of an existing technology (OPP). Thanks to its flexibility the results obtained with P4 exhibited better properties in terms of overhead and performance when compared to the aforementioned technology. 
+\end{abstract}

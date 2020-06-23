@@ -1,0 +1,102 @@
+\begin{thebibliography}{10}
+
+\bibitem{Gittins}
+Samuli Aalto, Urtzi Ayesta, and Rhonda Righter.
+\newblock On the gittins index in the m/g/1 queue.
+\newblock {\em Queueing Systems}, 63(1-4):437–458, 2009.
+
+\bibitem{dctcp}
+Mohammad Alizadeh, Albert Greenberg, David~A. Maltz, Jitendra Padhye, Parveen
+  Patel, Balaji Prabhakar, Sudipta Sengupta, and Murari Sridharan.
+\newblock Data center tcp (dctcp).
+\newblock In {\em Proceedings of the ACM SIGCOMM 2010 Conference}, SIGCOMM
+  ’10, page 63–74, New York, NY, USA, 2010. Association for Computing
+  Machinery.
+
+\bibitem{pFabric}
+Mohammad Alizadeh, Shuang Yang, Milad Sharif, Sachin Katti, Nick Mckeown,
+  Balaji Prabhakar, and Scott Shenker.
+\newblock pfabric.
+\newblock {\em Proceedings of the ACM SIGCOMM 2013 conference on SIGCOMM -
+  SIGCOMM 13}, 2013.
+
+\bibitem{pias}
+Wei Bai, Li~Chen, Kai Chen, Dongsu Han, Chen Tian, and Hao Wang.
+\newblock Pias: Practical information-agnostic flow scheduling for commodity
+  data centers.
+\newblock {\em IEEE/ACM Transactions on Networking}, 25(4):1954–1967, 2017.
+
+\bibitem{mqecn}
+Wei Bai, Li~Chen, Kai Chen, and Haitao Wu.
+\newblock Enabling ecn in multi-service multi-queue data centers.
+\newblock In {\em Proceedings of the 13th Usenix Conference on Networked
+  Systems Design and Implementation}, NSDI’16, page 537–549, USA, 2016.
+  USENIX Association.
+
+\bibitem{burke}
+Paul~J. Burke.
+\newblock The output of a queuing system.
+\newblock {\em Operations Research}, 4(6):699--704, 1956.
+
+\bibitem{mwf}
+Mark~E. Crovella.
+\newblock Performance evaluation with heavy tailed distributions.
+\newblock In Dror~G. Feitelson and Larry Rudolph, editors, {\em Job Scheduling
+  Strategies for Parallel Processing}, pages 1--10, Berlin, Heidelberg, 2001.
+  Springer Berlin Heidelberg.
+
+\bibitem{vl2}
+Albert Greenberg, James~R. Hamilton, Navendu Jain, Srikanth Kandula, Changhoon
+  Kim, Parantap Lahiri, David~A. Maltz, Parveen Patel, and Sudipta Sengupta.
+\newblock Vl2: A scalable and flexible data center network.
+\newblock In {\em Proceedings of the ACM SIGCOMM 2009 Conference on Data
+  Communication}, SIGCOMM ’09, page 51–62, New York, NY, USA, 2009.
+  Association for Computing Machinery.
+
+\bibitem{rdma}
+Chuanxiong Guo, Haitao Wu, Zhong Deng, Gaurav Soni, Jianxi Ye, Jitu Padhye, and
+  Marina Lipshteyn.
+\newblock Rdma over commodity ethernet at scale.
+\newblock In {\em Proceedings of the 2016 ACM SIGCOMM Conference}, SIGCOMM
+  ’16, page 202–215, New York, NY, USA, 2016. Association for Computing
+  Machinery.
+
+\bibitem{pso}
+J.~{Kennedy} and R.~{Eberhart}.
+\newblock Particle swarm optimization.
+\newblock In {\em Proceedings of ICNN'95 - International Conference on Neural
+  Networks}, volume~4, pages 1942--1948 vol.4, 1995.
+
+\bibitem{LAS_analysis}
+Idris~A. Rai, Guillaume Urvoy-Keller, and Ernst~W. Biersack.
+\newblock Analysis of las scheduling for job size distributions with high
+  variance.
+\newblock {\em Proceedings of the 2003 ACM SIGMETRICS international conference
+  on Measurement and modeling of computer systems - SIGMETRICS 03}, 2003.
+
+\bibitem{facebook_dcn}
+Arjun Roy, Hongyi Zeng, Jasmeet Bagga, George Porter, and Alex~C. Snoeren.
+\newblock Inside the social networks (datacenter) network.
+\newblock {\em Proceedings of the 2015 ACM Conference on Special Interest Group
+  on Data Communication - SIGCOMM 15}, 2015.
+
+\bibitem{schrage_1968}
+Linus Schrage.
+\newblock A proof of the optimality of the shortest remaining processing time
+  discipline.
+\newblock {\em Operations Research}, 16(3):687–690, 1968.
+
+\bibitem{pso2}
+Y.~{Shi} and R.~{Eberhart}.
+\newblock A modified particle swarm optimizer.
+\newblock In {\em 1998 IEEE International Conference on Evolutionary
+  Computation Proceedings. IEEE World Congress on Computational Intelligence
+  (Cat. No.98TH8360)}, pages 69--73, 1998.
+
+\bibitem{basinhoppin}
+David~J Wales and Jonathan~PK Doye.
+\newblock Global optimization by basin-hopping and the lowest energy structures
+  of lennard-jones clusters containing up to 110 atoms.
+\newblock {\em The Journal of Physical Chemistry A}, 101(28):5111--5116, 1997.
+
+\end{thebibliography}
