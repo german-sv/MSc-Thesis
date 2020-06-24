@@ -128,22 +128,28 @@ is given only by the flow arrival intensity $\lambda$. \\
 		\centering
 		\includegraphics[width=.99\linewidth]{Chapter3/Figures/equal_workload_split_bpdm}
 		\caption{Optimal load balance threshold}
-		\label{fig:cost-bm}
+		\label{fig:cost-dm}
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.99\linewidth]{Chapter3/Figures/per_spine_load_bpdm}
 		\caption{Load distribution per-server }
-		\label{fig:perspineload-bm}
+		\label{fig:perspineload-dm}
 	\end{subfigure}
 	\caption{Data mining workload. Simple case of $K$=2.}
-	\label{fig:lbthreshold-bm}
+	\label{fig:lbthreshold-dm}
 \end{figure}
-In the basic case of $K$=2 parallel servers, it is possible to plot the average sojourn time when varying the load balance threshold. Figures \ref{fig:cost-ws} and \ref{fig:cost-bm} show the aspect of the cost functions just described for the web search and the data mining workloads, respectively. All the axes are in log-scale. The vertical lines correspond to the split that gives perfect load balance, apportioning half of the traffic on the high priority server and half on the low priority one. This split may be referred to as \emph{perfect split} or \emph{proportionate split} interchangeably. Two phenomena are visible for both workloads, confirming previous intuitions. First, the optimal load balance threshold does not coincide, broadly speaking, with the proportionate split threshold. Second, the objective becomes much more extremely curled and steep around the perfect split, as the load approaches the saturation value 1. 
-% at high load only choice is perfect load balance otherwise overload link and saturation throughtput reduced
-% small variations of LB threshold at high load => strong detarioration of FCT for same reason
-% at low loads data mining workload is quite sentive to the load baalcne threshold aassignemnt
-% depend on variability of the distribution long and short flows get mixed even if low load would allow split
+\subsubsection{Load balance on 2 parallel servers}
+In the basic case of $K$=2 parallel servers, it is possible to plot the average sojourn time when varying the load balance threshold. Figures \ref{fig:cost-ws} and \ref{fig:cost-dm} show the aspect of the cost functions just described for the web search and the data mining workloads, respectively. All the axes are in log-scale and each curve represents a different normalized traffic $\lambda$. The vertical lines correspond the split that gives perfect load balance, apportioning half of the traffic on the high priority server and half on the low priority one. This split may be interchangeably referred to as \emph{perfect split} or \emph{proportionate split}. One phenomena is visible for both workloads, confirming previous intuitions. Imagine to connect the dots corresponding to the minima of the cost functions. The optimal load balance threshold does not coincide, broadly speaking, with the proportionate split threshold. Depending on the traffic level at which the system is operated and the workload, the optimal threshold triggers an earlier or later demotion with respect to the perfect split case. Equivalently, the jobs are distributed unfairly between the two servers (Figures \ref{fig:perspineload-ws}-\ref{fig:perspineload-dm}). For data mining, the imaginary line would be always in the leftmost side with respect to the proportionate split. That is, apart from loads close to saturation, the high priority server is kept as jobless as possible and the majority of work is sent to the low priority server. This result is coherent with the shape of the data mining workload, that presented huge variability. Plenty of short flows carrying few bytes are kept on a separated link from medium sized flows and a couple of long flows. This is not a surprise, since the problem formulation weighted more the average sojourn times of short flows. Slightly different trend is observed for web search. Moving from low to high values of $\lambda$, the optimal threshold is initially greater than the perfect split axis, then switches to its left and finally the two coincide. TODO Why??? For both cases, the objective function becomes much more extremely curled and steep around the perfect split axis when the load approaches the saturation value 1.  As already remarked, this is inevitable in order to fully exploit all the available capacity offered by the two parallel servers. At so high load any other traffic split would overload one of the two links and strongly deteriorate the average completion time of the flows going through it. Consistently, the cost function grows very rapidly in the neighborhood of the perfect split threshold value. \\
+Finally, the two workloads have different sensitivities to the load balance threshold optimization. In particular, the web search achieves appreciable FCT gains starting from medium loads only ($\lambda > 0.5$) with (TODO provide some numbers), whereas at low loads there is no practical difference with the proportionate split. On the contrary, the data mining distribution gives theoretically a (TODO percentage) lower waiting time even for $\lambda$=0.1. This again reflects the extreme variability of the workload, that is comprised by a disproportionate number of short flows. The perfect split would keep a lot of mice flows mixed with low priority flows of bigger size for protracted service time. Instead, the optimal threshold reroute few flows but lot of traffic on the low priority server. In fact, for $\lambda$=0.1 the absolute value of the optimal threshold is an order of magnitude lower than the proportionate split threshold, however only a small fraction of flows fits into this gap. 
+
+Summarizing, the above discussion confirms that the web search traffic is harder to cope with. This is the reason why in the following some results are shown exclusively for this workload.
+\subsubsection{Validity of the model}
+
+\subsubsection{Analysis of the model scalability}
+
+\subsubsection{Finding sub-thresholds}
+
 %TODO per spine load measured or plugged threshold in equation? 
 \section{The service discipline: FIFO or PS?}
 

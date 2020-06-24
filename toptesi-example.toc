@@ -34,8 +34,12 @@
 \contentsline {subsection}{\numberline {3.1.1}Problem abstraction}{21}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Workloads}{23}{subsection.3.1.2}
 \contentsline {subsection}{\numberline {3.1.3}Optimal traffic load balancing}{25}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}The service discipline: FIFO or PS?}{27}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Quantitative comparison}{27}{subsection.3.2.1}
+\contentsline {subsubsection}{Load balance on 2 parallel servers}{26}{section*.20}
+\contentsline {subsubsection}{Validity of the model}{28}{section*.21}
+\contentsline {subsubsection}{Analysis of the model scalability}{28}{section*.22}
+\contentsline {subsubsection}{Finding sub-thresholds}{28}{section*.23}
+\contentsline {section}{\numberline {3.2}The service discipline: FIFO or PS?}{28}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Quantitative comparison}{28}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Flow synchronization}{28}{subsection.3.2.2}
 \contentsline {chapter}{\numberline {4}Evaluation in a Datacenter Network}{29}{chapter.4}
 \contentsline {section}{\numberline {4.1}title}{29}{section.4.1}
@@ -44,4 +48,4 @@
 \contentsline {section}{\numberline {4.2}title}{29}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}title}{29}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}title}{29}{subsection.4.2.2}
-\contentsline {chapter}{Bibliography}{31}{chapter*.20}
+\contentsline {chapter}{Bibliography}{31}{chapter*.24}
