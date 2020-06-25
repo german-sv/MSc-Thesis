@@ -114,7 +114,7 @@ is given only by the flow arrival intensity $\lambda$. \\
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
-		\includegraphics[width=.99\linewidth]{Chapter3/Figures/per_spine_load_bpdm}%TODO change fig with the one with crossing lines
+		\includegraphics[width=.99\linewidth]{Chapter3/Figures/todored}%TODO change fig with the one with crossing lines
 		\caption{Load distribution per-server }
 		\label{fig:perspineload-ws}
 	\end{subfigure}
@@ -138,22 +138,211 @@ is given only by the flow arrival intensity $\lambda$. \\
 	\end{subfigure}
 	\caption{Data mining workload. Simple case of $K$=2.}
 	\label{fig:lbthreshold-dm}
-\end{figure}
+\end{figure}%TODO per spine load measured or plugged threshold in equation? 
 \subsubsection{Load balance on 2 parallel servers}
 In the basic case of $K$=2 parallel servers, it is possible to plot the average sojourn time when varying the load balance threshold. Figures \ref{fig:cost-ws} and \ref{fig:cost-dm} show the aspect of the cost functions just described for the web search and the data mining workloads, respectively. All the axes are in log-scale and each curve represents a different normalized traffic $\lambda$. The vertical lines correspond the split that gives perfect load balance, apportioning half of the traffic on the high priority server and half on the low priority one. This split may be interchangeably referred to as \emph{perfect split} or \emph{proportionate split}. One phenomena is visible for both workloads, confirming previous intuitions. Imagine to connect the dots corresponding to the minima of the cost functions. The optimal load balance threshold does not coincide, broadly speaking, with the proportionate split threshold. Depending on the traffic level at which the system is operated and the workload, the optimal threshold triggers an earlier or later demotion with respect to the perfect split case. Equivalently, the jobs are distributed unfairly between the two servers (Figures \ref{fig:perspineload-ws}-\ref{fig:perspineload-dm}). For data mining, the imaginary line would be always in the leftmost side with respect to the proportionate split. That is, apart from loads close to saturation, the high priority server is kept as jobless as possible and the majority of work is sent to the low priority server. This result is coherent with the shape of the data mining workload, that presented huge variability. Plenty of short flows carrying few bytes are kept on a separated link from medium sized flows and a couple of long flows. This is not a surprise, since the problem formulation weighted more the average sojourn times of short flows. Slightly different trend is observed for web search. Moving from low to high values of $\lambda$, the optimal threshold is initially greater than the perfect split axis, then switches to its left and finally the two coincide. TODO Why??? For both cases, the objective function becomes much more extremely curled and steep around the perfect split axis when the load approaches the saturation value 1.  As already remarked, this is inevitable in order to fully exploit all the available capacity offered by the two parallel servers. At so high load any other traffic split would overload one of the two links and strongly deteriorate the average completion time of the flows going through it. Consistently, the cost function grows very rapidly in the neighborhood of the perfect split threshold value. \\
 Finally, the two workloads have different sensitivities to the load balance threshold optimization. In particular, the web search achieves appreciable FCT gains starting from medium loads only ($\lambda > 0.5$) with (TODO provide some numbers), whereas at low loads there is no practical difference with the proportionate split. On the contrary, the data mining distribution gives theoretically a (TODO percentage) lower waiting time even for $\lambda$=0.1. This again reflects the extreme variability of the workload, that is comprised by a disproportionate number of short flows. The perfect split would keep a lot of mice flows mixed with low priority flows of bigger size for protracted service time. Instead, the optimal threshold reroute few flows but lot of traffic on the low priority server. In fact, for $\lambda$=0.1 the absolute value of the optimal threshold is an order of magnitude lower than the proportionate split threshold, however only a small fraction of flows fits into this gap. 
 
-Summarizing, the above discussion confirms that the web search traffic is harder to cope with. This is the reason why in the following some results are shown exclusively for this workload.
 \subsubsection{Validity of the model}
-
+Summarizing, the above discussion confirms that the web search traffic is harder than the data mining to cope with. This is the reason why in the following some results are shown exclusively for this workload. 
+Next, it is consolidated the validity of the stochastic optimization model with numerical simulations, in particular it is shown the effective benefit of optimal load balancing. The underlying topology is again the simplest one, comprised of two parallel M/M/1 servers with no inner prioritization. The serving discipline is Processor Sharing (PS), implemented with a fluid model where parallel flows are served with equally subdivided bandwidth. 
+The average normalized flow completion time (nFCT) has been considered as the primary evaluation metric.
+\begin{tcolorbox}
+	\textbf{nFCT}: Given a fixed data center topology and pair of source-destination servers, <$s$, $d$>, define $FCT_{opt}(x)$ as the FCT achieved by a flow of length $x$ originated from $s$ and directed to $d$ in a completely empty DCN. Let $FCT(x)$ as the FCT of a flow of length $x$ in a DCN in the presence of other flows. Let $X$ be the set of all possible flow lengths. Define:
+	\[
+	nFCT = \sum_{x \in X} \small \frac{FCT(x)}{FCT_{opt}(x)} \normalsize.
+	\]
+\end{tcolorbox}
+The normalized flow completion time is very similar in spirit to the average slowdown presented in Sec.\ref{sec:las}, but it is more handful as it is dimensionless. Its advantage is to put all flows on the same comparable scale, permitting a clean visual analysis of fairness with respect to flow size. By the way, this kind of evaluation is important to us, as spatial diversity mainly targets short flows. \\
+Figures \ref{fig:optlb-ws}-\ref{fig:optlb-dm} report the nFCT gain obtained thanks to the sole load balance optimizer. 
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.05\textwidth]{Chapter3/Figures/ws_ps_comparison}
+		\caption{nFCT comparison}
+		\label{fig:optlbgain-ws}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Chapter3/Figures/ws_ps_detailed.png}
+		\caption{Per-flow length nFCT}
+		\label{fig:optlbgainvsflowsize-ws}
+	\end{subfigure}
+	\caption{Web Search workload}
+	\label{fig:optlb-ws}
+\end{figure}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.05\textwidth]{Chapter3/Figures/dm_ps_comparison.png}
+		\caption{nFCT comparison}
+		\label{fig:optlbgain-dm}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Chapter3/Figures/dm_ps_detailed.png}
+		\caption{Per-flow length nFCT}
+		\label{fig:optlbgainvsflowsize-dm}
+	\end{subfigure}
+	\caption{Data Mining workload}
+	\label{fig:optlb-dm}
+\end{figure}
+Two ( TODO three if we talk about M/G/1 ) different scenarios are compared. Both adopt spatially-diverse MLFQ, but in one case the load balance threshold is optimized, in the other not. The former case is labeled as \texttt{SD-MLFQ-OPT}, whereas the latter as \texttt{SD-MLFQ}. Call $s_0$ and $s_1$ the two servers (i.e links/queues) and $\Omega$ the unique demotion threshold. Newly arrived flows always enter the system through $s_0$ as their attained service equals to 0, then they are rerouted to the link $s_1$ when $s_0$ has transmitted $\Omega$ of their bytes. As expected, the benefits on the average completion times are more pronounced for the data mining distribution, at all loads (Figures \ref{fig:optlbgain-ws}-\ref{fig:optlbgain-dm}). Even so, appealing phenomena emerge when looking at the detailed breakdown of the response time versus flow size (Fig.\ref{fig:optlbgainvsflowsize-ws}-\ref{fig:optlbgainvsflowsize-dm}). First focus on the SD-MLFQ system without load balancing optimization and compare the blue curves. In web search, the normalized response time curve exhibits a constant plateau which testify a substantial invariance of the slowdown with respect to the flow length. Conversely, in data mining there is an abrupt transition to lower response times for flows longer than 20MB, which roughly corresponds to the demotion threshold adopted in this case. The difference is justified by the fact that the proportionate split threshold for data mining cuts the flow size CDF near the 99-th percentile, due to the oft-repeated heavy-tail characteristic of this workload. Therefore, only few long flows remain to share the processor of the low-priority server $s_1$ --- keep in mind that all servers have PS. Since the normalized FCT captures the slowdown in respect to the ideal case where the flow is serviced alone, it is explained such a behavior. Next, let's concentrate on the spatial diversity with optimal load balancing (green curves), which is the real goal to validate the model. The two workload perform similarly and have analogous trends. Specifically, the encouraging result is that shorter flows indeed take advantage of spatial diversity, as they are sent through a less loaded path. The opposite happens to long jobs, which undergone the dual effect.
+%TODO at which lambda are these plots???
+% TODO definition of main spatial diversity principles (bullet item list)
+% TODO M/M/1 vs M/G/1 how implemented in practise? Assumed poisson arrivals but not true....what changed? How determined the variance of the job for subsequent servers? 
+%TODO missing factor 2
 \subsubsection{Analysis of the model scalability}
+So far the only scenario that has been investigated is the simple case of two parallel servers without sub-thresholds. This was useful to get confident with the relationships between load balance and the spatial diversity demotion mechanism. However, in the more general setting there might be much more parallel servers and at least two priority levels per server. The total number of thresholds was reduced by decoupling the load distribution by the server-local prioritization. Thus, the total complexity only depends on the number of servers $K$. Unfortunately, it is still typically high. 
+% dire python scipy solver
+% citare basin hoppin e pso heuristics (some parameters used, bla bla)
+% TODO why complexity is higher at load 0.6 ???
+\subsection{Finding sub-thresholds}
+\label{sec:subthresh-with-sd}
+Lastly, it is addressed the problem of finding the sub-thresholds. Starting from the optimal load balance thresholds that have been found with the solver, each server is then treated individually. In other words, the demotion from one server to another with the optimal load balance split makes each server observe a different version of the initial workload. Indeed, subsequent servers receive only flows larger than the precedent demotion thresholds, thus they handle truncations of the original flow size distribution above increasing percentiles. A clarifying overview is provided in Fig. \ref{fig:sd-spine-distribution} for the case of $K$=3 servers $s_0$, $s_1$, $s_2$. As usual, lower indexes identify higher priorities. Figure \ref{fig:wsbp-cdf} is the web search flow size distribution, from which new jobs are randomly generated. In a data center network, this would be the DC-wide workload. On the same axes are drawn the two optimal split thresholds, denoting the amount of service in kilobytes after which a flow is rerouted from $s_0$ to $s_1$ and then from $s_1$ to $s_2$. Call these thresholds $\Omega_1$ and $\Omega_2$ respectively. 
+\begin{figure}
+	\centering
+	\captionsetup{width=.8\linewidth}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1.05\textwidth]{Chapter3/Figures/ws-bp-cdf}
+		\caption{Workload on $s_0$}
+		\label{fig:wsbp-cdf}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Chapter3/Figures/wsbp-highp-cdf}
+		\caption{Workload on $s_1$}
+		\label{fig:highp-cdf}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{.3\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{Chapter3/Figures/wsbp-lowp-cdf}
+	\caption{Workload on $s_2$}
+	\label{fig:lowp-cdf}
+	\end{subfigure}
+	\caption{Job size distributions observed by servers $s_0$, $s_1$, $s_2$ in decreasing order of priority. Optimal load balance split for $\lambda=0.9$.}
+	\label{fig:sd-spine-distribution}
+\end{figure}
+Since all flows enter the system through $s_0$, this distribution is also the one observed by the highest priority server. Keep in mind that this is just the distribution to which a job belongs and not the actual traffic handled by a server. Indeed, $s_0$ serve only the first $\Omega_1$ bytes of these flows. The byte arrivals were obtained with Eq.\eqref{load-on-pqi}, that does require this distribution to be known. Then, subsequent servers of lower priorities observe left-truncated versions of the initial workload on $s_0$. These p.d.f. $f(x)$ and the corresponding c.d.f. $F(x)$ (Fig.\ref{fig:highp-cdf}-\ref{fig:lowp-cdf}) can be written as distribution conditioned to the new support $[\Omega_{s-1},\infty)$:
+\begin{equation}
+\label{eq:conditionalpdf}
+\begin{aligned}
+F(x|x>\Omega_{s-1}) &= \dfrac{F(x) - F(\Omega_{s-1})}{1-F(\Omega_{s-1})}  \\
+f(x|x>\Omega_{s-1}) &= \dfrac{f(x)}{1-F(\Omega_{s-1})} 
+\end{aligned}
+\end{equation}
+Nicely, these scaled distributions are still bounded Pareto, thanks to the scale-invariance property of this family of distributions. However, notice that their heavy-tails are progressively reduced with strong implications in limiting the applicability of spatial diversity to very large topologies. More details on this will be provided in the remaining of this work. \\
+Once these distributions are known, nothing is missing to apply the greedy sub-threshold assignment algorithms depicted in Sec. \ref{sec:greedy-thresh}. For completeness, they are briefly rewritten under this framework. Define in short:
+\begin{align*}
+	f_T(x) =& f(x|x>\Omega_{s-1})\\
+	\bar{F}_T(x) =& \bar{F}(x|x>\Omega_{s-1}). 
+\end{align*}
+Enumerate the available server $s \in \{1,..,K\}$. The goal is to find on all servers a set of sub-thresholds $\alpha_i^s$ to delimit demotion bounds across priority queues $i \in \{1,..,N\}$. \\
+\textit{Equal-Split-N} (ES-N) is substantially the same:
+\begin{equation}
+\alpha_i^s = F_T^{-1}\Big(\frac{i}{N}\Big)
+\end{equation}
+\textit{Load-Split-N} (LS-N) is also very similar. It required the solution of the set of load balance equations \ref{eq:main-K-PQ}. The expression of the average traffic $\mathbb{E}[L_i^s]$ on priority $i$ of server $s$ is unchanged. However, additional care must be paid to their sum $\sum_{i=1}^{N}\mathbb{E}[L_i^s]$. From proof \ref{proof}, this sum was equal to:
+\[
+\sum_{i=1}^{N}\mathbb{E}[L_i^s] = \int_{\Omega_{s-1}}^{\Omega_s}xf_T(x)dx + \Omega_{s} \bar{F}_T(\Omega_{s}) -\Omega_{s-1}\bar{F}_T(\Omega_{s-1})
+\]
+and the terms outside the integral always amounted to zero, so that the sum gave $\int_{\Omega_{s-1}}^{\Omega_s}xf_T(x)dx = \mathbb{E}[X]$. Instead, in this case they are generally different zero because the lower threshold $\alpha_0^s = \Omega_{s-1} \neq 0$ and the survival function above the upper threshold $\bar{F}_T(\alpha_N^s) = \bar{F}_T(\Omega_s) \neq 0$. Everything else is the same.
+\\
 
-\subsubsection{Finding sub-thresholds}
+As already mentioned, it is very likely that this approach is sub-optimal. However, it represents an handful way of computing all the thresholds in order to establish some understanding about the integration of spatial diversity with an MLFQ system. The next section will be an in-depth analysis of such dynamics, increasing the dimensionality of the system both in the number of servers and in the number of priorities.
 
-%TODO per spine load measured or plugged threshold in equation? 
 \section{The service discipline: FIFO or PS?}
+In the previous section it was laid down the basic framework of spatial diversity. It was remarked the fact that adopting spatial diversity translates into a priority-driven load balancing. At the same time were collected encouraging results about the effectiveness of the optimal load balancing. It was discussed the impact of two workloads commonly used as a benchmark in literature. Then, it was solved the optimal load balancing problem for up to $K$=9 parallel servers and explained how to compute the sub-thresholds without trying to face the overwhelming complexity of the optimal approach. In all the simple experiments carried out, the servers were always configured with Processor Sharing service discipline and without priority queues.
 
-\subsection{Quantitative comparison}
-FCT comparison: FIFO vs PS
-\subsection{Flow synchronization}
-Up to which point is spatial diversity meaningful? Flow synchronization problem. Burst arrivals. 
+This section aims to provide answers to principally two things. The first one is the behavior of the priority-driven load balancing when increasing the number of server $K$ up to 9 parallel servers. Second, it is treated the integration of the priority-driven load balancing with the legacy MLFQ system. In practice, it is considered the general case where each server has many PQs on its interfaces used in strict priority. As it will be explained shortly, it turns out that for both attempts, the performances of the system are highly correlated with the adopted servicing policy. Considered cases are the FIFO (FCFS) servers and the usual PS servers. 
+
+\subsection{Dimensioning spatial-diversity}
+\label{sec:dimensioning-spatial}
+First it is addressed the first question: what are the effects of augmenting the spatial diversity \emph{rank}? 
+\begin{tcolorbox}
+	\textbf{SD-rank}: Given a data center topology with $S$ spines --- or the equivalent system of parallel M/M/1 servers where is applied priority-driven load balancing, that is each server handle a group of priority and a flow is routed depending on its assigned priority. Let's define the spatial-diversity rank (SD-rank) as the number $K$ of servers which handle different priorities. 
+\end{tcolorbox}
+The spatial diversity ranks tells how many M/M/1 servers (or group of servers) are considered to be used to implement spatial diversity. For example, suppose there are 4 parallel servers available $s_0$, $s_1$, $s_2$, $s_3$. Consider these two possibilities. 
+\begin{enumerate}
+	\item \textbf{Rank 2}. The four servers are grouped in two pairs, say $(s_0, s_1), (s_2,s_3)$. Spatial diversity demotion is applied at pair level. This means there is only one load balance threshold $\Omega$. When the longest flow enters the system, it is sent at random either on $s_0$ or $s_1$. As soon as the flow has received service $\Omega$ it is demoted, again randomly, either on $s_3$ or $s_4$. In other words, this can be seen as a system of only two parallel servers with twice the capacity each, where only one rerouting happens to the longest flow. 
+	\item \textbf{Rank 4 \textit{(full-rank)}}. The servers are not grouped in any way. All servers participate to the priority-driven load balance. Therefore, there are 3 thresholds and the longest flow it is rerouted three times.
+\end{enumerate}
+In the next experiments (Fig.\ref{fig:lb-var-K-fifo}) is evaluated the full-rank spatial diversity system for three topologies, corresponding to $K=3$, $K=5$, $K=9$ and for two serving policies: PS and FIFO. The number of priority queues $N$ is still one per server. Remember that the numerical simulator is a job level simulator, thus flows are not fragmented in packets anyhow. This means that the FIFO policy is absolutely non-preemptive for jobs in the same priority queue. The service of a flow cannot be interrupted and flows arriving in the meanwhile are queued back in a first-in first-out order. Instead, the PS discipline subdivides the available capacity among all flows present in the system with a fluid approximation. Thus, a fresh flow share immediately the service rate granted to its priority queue with other flows in the same queue. 
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{Chapter3/Figures/lb_opt_vs_nopt_comparison}
+		\caption{nFCT comparison}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{Chapter3/Figures/lb_opt_vs_nopt_detailed}
+		\caption{Per-flow length nFCT ($\lambda$=0.9)}
+		\label{fig:lb-var-K-fifo-detailed}
+	\end{subfigure}
+	\caption{Web Search workload and FIFO discipline at 99\% confidence interval.}
+	\label{fig:lb-var-K-fifo}
+\end{figure}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{Chapter3/Figures/todo}
+		\caption{nFCT comparison}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{Chapter3/Figures/todo}
+		\caption{Per-flow length nFCT ($\lambda$=0.9)}
+		\label{fig:lb-var-K-ps-detailed}
+	\end{subfigure}
+	\caption{Web Search workload and PS discipline at 99\% confidence interval. \textcolor{red}{GRAFICI MANCANTI MA SIMULAZIONI GERMAN CON QUELLO SCENARIO GIA FATTE MA USATE NEI GRAFICI FINALI. CHIEDERE GRAFICO A PARTE SE UTILE}}
+	\label{fig:lb-var-K-ps}
+\end{figure}
+%TODO Processor Sharing for fixed N=1 and varying K
+%TODO when N=2 and FIFO what's the policy?
+These experiments were carried out both with and without the optimized load balance thresholds. The first very positive observation is that, whatever the number of servers, the optimal load balance wins over the proportionate split. This again confirms the validity of the queuing model formulation for load balancing. 
+The FIFO policy is clearly unfair with respect to short flows (Fig.\ref{fig:lb-var-K-fifo-detailed}). This is because without preemption a single elephant flow could starve a myriad of short flows. The unfairness is mitigated when increasing the spatial diversity rank, as long flows are demoted earlier and leave quickly high priority servers. Notably, for a fixed $K$, having $N$=1 priority queue is the worst case from the point of view of mice flow starvation. With $N$>1 PQs, the service received by a flow on each server would be broken in multiple phases, each on a different priority queue. Since the PQs are scheduled in Strict Priority order and newly arrived flows enter in high priority, a short flow behind longer ones would have to wait only until the demotion at lower priority of the flows ahead. Somehow the demotion preempts the long flows, and weaken the impact of having a FIFO policy on the PQs themselves. The scenario changes with the PS service discipline. Short flows do not suffer the same issues yet mentioned, because they always share the processor with other flows. However, when increasing the rank long flows start to be excessively penalized. Remember that subsequent servers observe cut workloads, whose heavy-tailed property is gradually destroyed. In other words, the flow size distributions fed in low priority servers have reduced variability (Fig. \ref{fig:cdfs}). This is a clear downside for PS policy. Indeed, it is well-known that under the assumption of low variability of the distribution, it is better to adopt a FCFS order. As a trivial example, suppose to schedule two flows $f_1, f_2$ of size 10 bits/bytes/packets,... Denote as $T(f_i)$ the average flow completion time of flow $i$, expressed in transmission slots. FIFO scheduling would give:
+\[
+	T_{FIFO}(f_1) = T_{FIFO}(f_2) = \dfrac{10+20}{2} = 15
+\]
+Instead, PS scheduling would be worse:
+\[
+T_{PS}(f_1) = T_{PS}(f_2) = \dfrac{19+20}{2} = 19.5
+\]
+\textcolor{red}{TODO PRECEDENTE DISCORSO VA VERIFICATO CON IL GRAFICO SOPRA MANCANTE}\\
+The study of the system with increased number of priority queues led to even more surprising results. This step really integrates the spatial diversity in the legacy MLFQ system with many priority levels. Here it is reported only the Processor Sharing discipline for the reasons explained few lines above. It is clear that for the FIFO case increasing $N$ further minimize the average flow completion time. A simulative result confirming this fact will be present in the last section \S \ref{sec:final-comparison} of the chapter during the final comparisons of SD-MLFQ (spatial diversity case) with ES-N (non spatial diversity case). Figure \ref{fig:sdmlfq-variable-N} is a key result that will uncover potential bottlenecks of SD-MLFQ. In this experiments are compared the average flow completion times of the system with fixed $K$=4 and variable $N$. Load balance thresholds are not optimized in this case, but are set to grant the proportionate split of the traffic on the four parallel servers. The sub-thresholds have been assigned with the simple ES-N variation for spatial diversity (\S \ref{sec:subthresh-with-sd}). Very interestingly, this numerical results provide a different perspective on the ideal granularity of priority queues per server with respect to previous works. While on the systems that approximate LAS or SRPT schedulers with PQs  \cite{pias, pFabric}, increasing the number of priority queues is always beneficial, it is not so when spatial diversity is introduced. At low load there is not a visible difference among the simulated scenarios. However, at high load the best average nFCT is attained with $N$=2 priorities per server (dashed orange curve). The peculiar phenomenon is the behavior of the case $N$=8 (red curve), whose corresponding nFCT starts to increase consistently above $\lambda=0.8$. 
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{Chapter3/Figures/sd_mlfq_k4_comparison.png}
+		\caption{nFCT comparison}
+		\label{fig:sdmlfq-variable-N-fct}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{Chapter3/Figures/sd_mlfq_k4_detailed.png}
+		\caption{Per-flow length nFCT ($\lambda$=0.9)}
+		\label{fig:sdmlfq-variable-N-fct-detailed}
+	\end{subfigure}
+	\caption{Web search workload and PS discipline at 99\% confidence interval}
+	\label{fig:sdmlfq-variable-N}
+\end{figure}
+From the detailed breakdown of Fig.\ref{fig:sdmlfq-variable-N-fct-detailed}, it is evinced that the most severe degradation happens to long flows. They suffer an unacceptable penalty, which globally makes also the average worse. As a general trend, an higher number of priorities per server is reflected in a more pronounced raise of the job response time of long flows. At the same time, coherently with the scheduling theory of LAS (\S \ref{sec:las}) and the results of PIAS, flows between 100KB and 1MB (medium size flows) are improved. \\ \\
+Such an extreme behavior on long flows was worth of extra-attention. In particular, it brings up an important question: is the best choice to configure low priority servers with a fine-grained prioritization?
+\subsubsection{Elephant demotion}
+\textcolor{red}{TODO Describe figures of hazard rate and optimal demotions for low priority spines. Link this observation with previous intuition that subsequent spines observe distribtions with less and less variability (LAS and SRPT require high variability !!!)}. 
+\subsubsection{Flow synchronization}
+\textcolor{red}{Problems of previous subsubsection are exacerbated by flow syn phenomenon (not observed in PIAS)}.
+\subsection{Final comparison}
+\textcolor{red}{Final comparison with ES-N (no spatial). Show plots and resume table}.

@@ -14,4 +14,10 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Workload properties\relax }}{23}{figure.caption.17}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Web search workload. Simple case of $K$=2.\relax }}{27}{figure.caption.18}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Data mining workload. Simple case of $K$=2.\relax }}{27}{figure.caption.19}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Web Search workload\relax }}{29}{figure.caption.22}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Data Mining workload\relax }}{29}{figure.caption.23}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Job size distributions observed by servers $s_0$, $s_1$, $s_2$ in decreasing order of priority. Optimal load balance split for $\lambda =0.9$.\relax }}{31}{figure.caption.25}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Web Search workload and FIFO discipline at 99\% confidence interval.\relax }}{34}{figure.caption.26}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Web Search workload and PS discipline at 99\% confidence interval. \leavevmode {\color {red}GRAFICI MANCANTI MA SIMULAZIONI GERMAN CON QUELLO SCENARIO GIA FATTE MA USATE NEI GRAFICI FINALI. CHIEDERE GRAFICO A PARTE SE UTILE}\relax }}{34}{figure.caption.27}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Web search workload and PS discipline at 99\% confidence interval\relax }}{35}{figure.caption.28}
 \addvspace {10\p@ }
