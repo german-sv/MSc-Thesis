@@ -196,6 +196,16 @@ Two ( TODO three if we talk about M/G/1 ) different scenarios are compared. Both
 %TODO missing factor 2
 \subsubsection{Analysis of the model scalability}
 So far the only scenario that has been investigated is the simple case of two parallel servers without sub-thresholds. This was useful to get confident with the relationships between load balance and the spatial diversity demotion mechanism. However, in the more general setting there might be much more parallel servers and at least two priority levels per server. The total number of thresholds was reduced by decoupling the load distribution by the server-local prioritization. Thus, the total complexity only depends on the number of servers $K$. Unfortunately, it is still typically high. 
+
+{\color{red}
+\subsubsection{Finding optimal LB threshold with Basin-hopping}
+Basin-hopping is a meta-heuristic which provides means of solving non-convex optimization problems.
+It operates on an iterative basis by selecting random starting point in possible solution state-space and performing local minimization. 
+Subsequently the process is repeated by "hopping" to a different point and re-performing minimum search.
+
+We consider BFGS as a local minimization algorithm, we set a step size equals to 100 for random perturbation as it was empirically found to be a good tradeoff between convergence speed and accuracy.
+We then perform 300 iterations for each point in \textbf{figura con i load} on a i7-7700k with 16GB of RAM.
+}
 % dire python scipy solver
 % citare basin hoppin e pso heuristics (some parameters used, bla bla)
 % TODO why complexity is higher at load 0.6 ???
